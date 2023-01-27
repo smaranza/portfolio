@@ -1,0 +1,200 @@
+
+
+.pc .front:not(.gif) {
+
+	background-image: url("img/pc/front_pc_pixel.png");
+}
+
+.pc .side{
+    background-image: url("img/pc/side_pc_pixel.png");
+}
+
+
+
+.pc .top {
+    background-image: url("img/pc/top_pc_pixel.png");
+}
+
+.pc .bottom {
+    background-image: url("img/pc/top_pc_pixel.png");
+}
+
+.pc .back{
+    background-image: url("img/pc/bottom_pc_pixel.png");
+}
+
+#bottom-screen .front {
+    background-image: url("img/pc/keyboard_pc_pixel.png");   
+}
+
+.pc .gif{
+	background-image: url("img/pc/static_noise_pc.gif");
+}
+
+/* BIG */
+
+
+        .pc{
+            transform-style: preserve-3d;
+            z-index: 200;
+            }
+
+
+        .big #top-screen {
+            width: 9em;
+            height: 7em;
+            transform-origin: bottom center;
+            transform:
+                translateY(.2em)
+                translateZ(-1em) 
+                rotateX(8deg);
+        }
+
+
+
+        .big #bottom-screen {
+            width: 9em;
+            height: 7em;
+            transform-origin: top center;
+            transform: 
+                translateY(1em) 
+                rotateX(90deg);
+        }
+
+
+        .big.pc .front:not(.gif) {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            transform:
+                translateZ(1em);
+            background-color: rgba(0,0,0,0);
+
+        }
+
+        .big.pc .side{
+            width: 9em;
+            height: 7em;
+            background-color: rgba(0, 0, 0, 1);
+
+        }
+
+
+
+        .big.pc .top {
+            transform: rotateX(90deg);
+            background-size: cover;
+            height: 1em;
+        }
+
+        .big.pc .right {
+            width: 1em;
+            transform-origin: left center;
+            transform: translateX(9em) rotateY(-90deg);
+         }
+
+        .big.pc .left {
+            width: 1em;
+            transform-origin: left center;
+            transform: rotateY(-90deg);
+        }
+
+        .big.pc .bottom {
+            height: 1em;
+            transform-origin: center top;
+            transform: translateY(7em) rotateX(90deg);
+        }
+
+        .big.pc .back{
+            transform: translateZ(0em);
+        }
+
+        .big.pc .gif{
+            transform: translateZ(.6em);
+        }
+
+/* MINI */
+
+        
+        .mini.pc div{
+            width: 3em;
+        }
+
+
+        .mini #top-screen {
+
+            height: 2em;
+            transform-origin: bottom center;
+            transform:
+                /*translateY(.2em)*/
+                /*translateZ(-1em);*/
+        }
+
+
+
+        .mini #bottom-screen {
+            
+            height: 2em;
+            transform-origin: top center;
+            transform: 
+                translateY(.4em) 
+                /*translateZ(-.8em)*/
+                rotateX(75deg);
+        }
+
+
+        .mini.pc .front:not(.gif) {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            transform:
+                translateZ(.4em);
+            background-color: rgba(0,0,0,0);
+
+        }
+
+        .mini.pc .side{
+            width: 3em;
+            height: 2em;
+            background-color: rgba(0, 0, 0, 1);
+
+        }
+
+
+
+        .mini.pc .top {
+            transform: rotateX(90deg);
+            background-size: cover;
+            height: .4em;
+        }
+
+        .mini.pc .right {
+
+            transform-origin: left center;
+            transform: translateX(3em) rotateY(-90deg);
+         }
+
+        .mini.pc .left {
+            width: .4em;
+
+            transform-origin: left center;
+            transform: rotateY(-90deg);
+        }
+
+        .mini.pc .bottom {
+            height: .4em;
+            transform-origin: center top;
+            transform: translateY(2em) rotateX(90deg);
+        }
+
+        .mini.pc .back{
+            transform: translateZ(0em);
+        }
+
+        .mini.pc .gif{
+            transform: translateZ(.2em);
+        }
+
+
+
+

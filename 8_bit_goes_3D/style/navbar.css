@@ -1,0 +1,231 @@
+
+#navbar {
+	position: sticky;
+	top: 0%;
+	z-index: 2000;
+	background-color: #fbdb65;
+}
+
+
+header {
+
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 2em 0em 1em 0em;
+	border-bottom: 3px solid black !important;
+
+}
+
+
+header .head:hover::before {
+
+	content: ' ';
+
+	width: 2em;
+	height: 2em;
+
+	margin-right: .5em;
+	background-image: url("img/home.png");
+	background-repeat: no-repeat;
+
+	display: inline-block;
+	position: absolute;	
+ 	left: -2em;
+
+}
+
+.head{
+	border: 1px solid blue;
+	max-width: 60vw;
+	width: 100%;
+	height: 3em;
+	transition: .5s;
+}
+
+
+.head:hover{
+	transform: translateX(1.6em);
+}
+
+
+
+.head h1, .head p {
+	display: inline-block;
+	width: auto;
+	margin-right: .3em;
+}
+
+.cube p{
+	position: relative;
+	display: none;
+}
+
+nav {
+
+	width: auto;
+	min-width: 40%;
+
+	display: flex;
+	justify-content: flex-start;
+
+	/*margin-top: 2em;*/
+	border: 1px solid orangered;
+}
+
+
+nav>div>p {
+	display: inline-block;
+	width: auto;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+nav img {
+	/*border: 1px solid blue;*/
+	/*margin: 1em ;*/
+	position: absolute;
+}
+
+.tag {
+	/*width: 100%;*/
+	/*min-width: 50%;*/
+	height: 3em;
+	margin-right: 2em;
+	display: flex;
+	flex-direction: row;
+	border: 1px solid grey;
+	overflow-wrap: all;
+}
+
+.tag:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+header.tag {
+	width: 100%;
+	min-width: 50%;
+}
+
+
+#down_nav {
+
+	top: 5em;
+	margin-top: 1em;
+	padding-bottom: 1em;
+	/*width: 100%;*/
+	justify-content: flex-start;
+
+}
+
+.first {
+margin-right: 0px;
+}
+
+/* MINI */
+
+		.mini {
+			margin-left: 2.5em;
+		}
+
+		.mini p {
+			display: inline-block;
+			position:relative;
+			/*margin-left: auto;*/
+			/*width: max-content;*/
+		}
+
+
+		nav .mini .right, nav .mini .left {
+			width: .4em !important;
+		}
+
+		nav .mini .top, nav .mini .bottom {
+			height: .4em !important;
+		}
+
+/* TAPE */
+		
+		.mini.tape {
+			width: 3em;
+			transform-style: preserve-3d;
+		}
+
+		.mini.tape .side {
+			width: 3em;
+			height: 2.2em;
+			/*background-color: yellow;
+			border: 1px solid green;*/
+		}
+
+		.mini.tape .back{
+			transform: 
+			translateZ(-.4em);
+		}
+
+
+		.mini.tape .left{
+		 	
+		 	transform-origin: left;
+		 	transform: rotateY(90deg);
+		 	width: .4em;		 	
+		 }
+
+		.mini.tape .right{
+		 	width: .4em;
+		 	transform-origin: left;
+		 	transform: 
+				translateX(3em)
+		 		rotateY(90deg);
+		 }
+
+		.mini.tape .bottom{
+		 	height:.4em;
+		 	transform-origin: top;
+		 	transform: 
+				translateY(2.2em)
+		 		rotateX(-90deg);
+		}
+
+		.mini.tape .top{
+		 	height:.4em;
+		 	transform-origin: top;
+		 	transform: 
+		 		rotateX(-90deg);
+		 }
+
+
+
+		.a.tape .front{
+			background-image: url("img/tape/A_front.png");
+		}
+
+		.b.tape .front{
+			background-image: url("img/tape/B_front.png");
+		}
+
+		.tape .back {
+			background-image: url("img/tape/A_front.png");
+		}
+
+		.tape .left, .right {
+			background-image: url("img/tape/A_side.png");	
+		}
+
+
+		.tape .top{
+			background-image: url("img/tape/A_top.png");
+		}
+
+		.tape .bottom {
+				background-image: url("img/tape/A_bottom.png");
+		}
+
+
+
+@media screen 
+	and (min-width: 0px)
+	and (max-width: 800px) {
+
+}
