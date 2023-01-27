@@ -25,7 +25,7 @@
             margin: var(--spacing);
         }
 
-        #canvas-container:hover .ui.paused {
+        #canvas-container:hover .ui {
             visibility: visible;
         }
 
@@ -95,7 +95,7 @@
     <main id="canvas-container" onclick="toggleDraw()">
         <button class="ui resume">Resume</button>
         <button class="ui clear" onclick="clearDraw()">Clear</button>
-        <p class="ui">Game paused. Press "Space" or click on artboard to resume</p>
+        <p class="ui">Press "Space" or click on artboard to pause/resume generator</p>
     </main>
     <div class="slider">
         <label for="hue">Hue</label>

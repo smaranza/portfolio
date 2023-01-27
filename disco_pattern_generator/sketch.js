@@ -23,7 +23,6 @@ function setup() {
     clearDraw();
     strokeWeight(sWidth);
     canDraw = true;
-    // colorMode(HSB, 255);
 }
 
 window.addEventListener('keyup', function(e) {

@@ -1,0 +1,60 @@
+$icons: 
+  "comment",
+  'envelope',
+  'arrow',
+  'checkmark',
+  'hamburger',
+  'close',
+  'plus';
+
+// --------------------------------
+// --------- DEFAULT state --------
+// --------------------------------
+
+@each $icon in $icons {
+  .icon-#{$icon}:before {
+    display: inline-block;
+    position: relative;
+    content: "";
+    background-image: url(#{$icon-path}/brand-#{$icon}.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+// --------------------------------
+// ------ ACTIVE/HOVER state ------
+// --------------------------------
+
+@include hover {
+  @each $icon in $icons {
+    &.icon-#{$icon}:before {
+    background-image: url(#{$icon-path}/brand-#{$icon}-active.svg);
+    }
+  }
+
+  &.icon-plus:before {
+    background-image: url(#{$icon-path}/brand-plus.svg);
+    transform: rotate(90deg);
+  }
+
+  &.icon-checkmark:before {
+    background-image: url(#{$icon-path}/brand-checkmark.svg);
+    transform: scale(1.2);
+  }
+}
+
+@include active {
+  @each $icon in $icons {
+    &.icon-#{$icon}:before {
+      transform: scale(1.2);
+    }
+
+    &.icon-plus:before {
+      background-image: url(#{$icon-path}/brand-plus.svg);
+      transform: rotate(180deg) scale(1.2);
+    }
+  }
+}

@@ -1,0 +1,434 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	transition: transform .01s ease-in-out;
+	will-change: transform,left,opacity;
+	box-sizing: border-box;
+	user-select: none;
+}
+
+body{
+  
+	width: 100vw;
+	height: 100vh;
+  font-family: arial, sans-serif;
+	font-size: .8em;
+	font-weight: bold;
+  overflow: hidden;
+
+}
+
+a {
+	text-decoration: none !important;
+	color: inherit !important;
+}
+
+ h1 {
+ 	display: none;
+ }
+
+
+/* ---   HEADER   --- */
+
+    @keyframes marquee{
+        0% {left:-422%;}
+        100% {left:100vw;}
+      }
+
+    nav div:first-child {
+      display: flex;
+      justify-content: space-between !important; 
+    }
+
+    nav div a{
+
+      position: relative;
+      display: inline-block;
+      padding: 1 0rem;
+      text-decoration: none;
+      /*border: 1px solid black;*/
+      animation: marquee 50s linear infinite;
+      transition: .5s;
+
+    }
+
+    nav div {
+
+      display: flex;
+      justify-content: flex-end;
+      flex-grow: 1;
+
+      margin: auto;
+      overflow: visible;
+    }
+
+    nav	{
+
+      position: absolute;
+      height: 2rem;
+      width: 300vw;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      /*background-color: white;*/
+      /*border-bottom: 1em solid #ff1683;;*/
+      top: 0rem;
+
+    }
+
+    nav div a:hover {
+      animation-play-state: paused;
+      color: #9b59b6;
+      text-decoration: underline !important;
+    }
+
+    #marquee {
+      /*display: none;*/	
+      position: fixed;
+      top: 0px;
+
+      width: 100vw;
+      height: 2rem;
+
+      /*background-color: orange;*/
+      z-index: 100;
+    }
+
+
+#big-container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#movable-background {
+
+	position: absolute;
+	width: 340vw;
+	height: 200vh;
+	z-index: 50;
+/*	background-color: grey; */
+  
+}
+
+.magenta {
+	font-style: italic;
+	color: #ff1683 !important;
+
+	font-size: 1rem;
+}
+
+#alert {
+	display: none;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 2000;
+}
+
+
+/* -- ELs  -- */
+	
+	/* -- CLASSes  -- */
+
+		.el {
+
+			display: none;
+			padding: 2.3em;
+
+			position: absolute;
+			min-width: 2%;				
+			background-color: white;
+
+			border: .23em solid;
+		}
+
+	 	.el:hover{
+		    box-shadow: 0px 5px 40px -10px #acacac;
+		    transition: .2s ease-in;
+		}
+		
+
+		.host {
+
+			border-color:#9b59b6;
+			border-radius: 3em;	
+			border-top-left-radius: 0% !important; 
+
+			background-color: white; 
+			color: #9b59b6;
+
+			/*transform: translate(-50%,-50%);*/
+			
+			/*background-color: rgba(255, 69, 0, .7);*/
+
+		}
+
+
+		.guest {
+			border-radius: 3em;	
+			/*visibility: hidden;*/
+			/*opacity: 0;*/
+			border-color: lightgrey;
+			color: lightgrey;
+			border-bottom-right-radius: 0% !important; 
+			
+			/*background-color: yellowgreen; */
+
+		}
+
+
+		.trillo {
+			animation: trillo 1800ms linear	infinite;
+		}
+
+		.trillo:hover {
+			animation-play-state: paused !important;
+		}
+		.pulse {
+			animation: pulse 1s ease-out infinite;
+		}
+
+		@keyframes pulse {
+			0% { 
+				border: 5px solid #ff1683;
+				color: #ff1683;
+			}
+			100% { 
+				border: 5px solid rgba(255,255,255,0);
+				color: rgba(255,255,255,0);
+			}
+		}
+
+		.poppi {
+			transform-origin: center;
+			animation: popup 600ms;
+			animation-timing-function: cubic-bezier(0.24, 1.39, 0.63, 0.83);
+			animation-iteration-count: 1;
+
+
+		}
+
+		.selectImg{
+			animation: trillo 1800ms linear	infinite, fade 1800ms step-start infinite;
+			animation-play-state: inherit !important;
+		}
+
+
+		@keyframes fade{
+			0%{ opacity: 0; }
+			50% { opacity: 0; }
+			100% {opacity: 1;}
+		}
+
+		@keyframes trillo {
+			
+			49% { transform: translate(0,0) rotate(0deg); }
+    		50% { transform: translate(-3px, -2px) rotate(-1deg); }
+		    55% { transform: translate(-5px, 0px) rotate(1deg); }
+		    60% { transform: translate(5px, 2px) rotate(0deg); }
+		    65% { transform: translate(1px, -3px) rotate(1deg); }
+		    70% { transform: translate(-3px, 2px) rotate(-1deg); }
+		    75% { transform: translate(-5px, 1px) rotate(0deg); }
+		    80% { transform: translate(5px, 1px) rotate(-1deg); }
+		    85% { transform: translate(-3px, -3px) rotate(1deg); }
+		    90% { transform: translate(1px, 2px) rotate(0deg); }
+		    95% { transform: translate(1px, -2px) rotate(-1deg); }
+		    100% { transform: translate(1px, 1px) rotate(0deg); }
+		}
+
+		@keyframes popup {
+			from{
+				transform: scale(0);
+			}
+			to{	
+				transform: scale(1);
+			}
+		}
+
+
+		#center {
+
+			position: fixed;
+			bottom: 50%;
+			left: 50%;
+
+			transform: translate(-50%,-50%);
+			min-width:15vw;
+			min-height:fit-content;
+
+			padding: 1rem;
+
+			z-index: 1000;
+			color: #ff1683;
+
+			border-radius: 2rem;
+			text-shadow:0px 0px 5px white;
+
+
+			top: 85%;
+					
+		}
+
+	
+
+	/* --  HOST EL positioning -- */
+
+
+		#welcome {
+			left: 48.8%;
+			top: 47.8%;
+		}
+
+		#nientepaura{
+			top: 65%;
+			left: 51%;
+		}
+		
+		#sonice {
+			top: 31%;
+			left: 53%;
+		}
+
+		#io {
+			top: 85%;
+			left: 48%;
+		}
+
+		#casa {
+			top: 87%;
+			left: 47%;
+		}
+
+		#offerta {
+			top: 38.3%;
+			left: 65%;
+		}
+
+		#bevi {
+			top: 23%;
+			left: 82%;
+		}
+
+		#biscotto {
+			top: 44%;
+			left: 77%;
+		}
+
+		#subito {
+			top: 37.8%;
+			left: 79.4%;
+		}
+
+		#brucia {
+			top: 71%;
+			left: 89%;
+		}
+
+		#mentre {
+			top: 51%;
+			left: 92%;
+		}
+
+	
+	/* --  GUEST EL positioining -- */
+
+		#entusiasmo {
+			top:41%;
+			left:53%;
+			animation-delay: 1.2s;
+			opacity: 100;
+			/*display: block;*/
+		}
+
+		#sospetto {
+			top:52.8%;
+			left:43.4%;
+			animation-delay: .3s;
+			visibility: visible;
+			opacity: 100;
+			/*display: block;*/
+		}
+
+		#terrore {
+			top:53.5%;
+			left:55%;
+			animation-delay: .8s;
+			opacity: 100;
+			/*display: block;*/
+		}
+		#chi {
+			top: 73%;
+			left: 48%;
+			animation-delay: .6s;
+		}
+
+		#cosa {
+			top: 63.8%;
+			left: 59%;
+			animation-delay: 300ms;
+		}
+
+		#curioso {
+			top: 21%;
+			left: 58%;
+			animation-delay: 560ms;
+		}
+
+		#piacere {
+			top: 84%;
+			left: 62%;
+			animation-delay: 10ms;
+		}
+
+		#accettazione {
+			top: 31%;
+			left: 72%;
+			animation-delay: 830ms;
+		}
+
+		#rifiuto {
+			top: 52%;
+			left: 66%;
+			animation-delay: 210ms;
+		}
+
+		#puzza {
+			top: 62%;
+			left: 81%;
+			animation-delay: 360ms;
+		}
+
+		#the {
+			top: 22%;
+			left: 75%;
+			animation-delay: 700ms;
+		}
+
+		#succo {
+			top: 10%;
+			left: 82.5%;
+			animation-delay: 100ms;
+		}
+
+		#caffe {
+			top: 14%;
+			left: 90%;
+			animation-delay: 0ms;
+		}
+
+		#relax {
+			top: 63%;
+			left: 100%;
+			animation-delay: 50ms;
+		}
+
