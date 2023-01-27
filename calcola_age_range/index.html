@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DISTRIBUZIONE PER FASCIA D'ETÀ</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: Helvetica, sans-serif;
+                color: #3f474f;
+                padding: 5em;
+            }
+            
+            h1 {
+                font-weight: 100;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: .2rem;
+            }
+            
+            header {
+                margin-bottom: 2em;
+            }
+            
+            section {
+                width: 100%;
+                max-width: 900px;
+                margin: auto;
+                display: flex;
+                flex-flow: row;
+                align-items: flex-start;
+                justify-content: space-around;
+                box-shadow: 6px 6px 20px 0px rgb(40 22 73 / 18%);
+                background: linear-gradient(45deg, #f9fbff 30%, #f8f6ff 100%);
+                border-radius: 2em;
+                padding: 2.5em 4em 6em;
+                margin-bottom: 5em;
+            }
+            
+            main{
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+            }
+            
+            #interaction {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                margin-bottom: 2em;
+                width: 100%;
+            }
+            
+            label {
+                margin-left: 0.6em;
+            }
+            
+            input {
+                height: 3em;
+                margin-bottom: .8em;
+                padding: 1em;
+                border: 1px solid #278ceb;
+            }
+            
+            input::placeholder {
+                color: silver;
+                font-style: italic;
+            }
+            
+            button {
+                background: linear-gradient(45deg, #278ceb 10%, #0069eb 100%);
+                color: white;
+                border: 2px solid #278ceb;
+                text-transform: capitalize;
+                font-size: 1.2em;
+                padding: 1.2em;
+            }
+            
+            button:hover {
+                border-color: #0069eb;
+                background: linear-gradient(75deg, #278ceb 10%, #0069eb 100%);
+            }
+            
+            button:active {
+                border-color: #003392;
+            }
+            
+            input,
+            button,
+            #errors,
+            #confirm {
+                border-radius: .8em;
+            }
+            
+            #messages {
+                width: 100%;
+            }
+            
+            #errors {
+                padding: 1.2em;
+                background: rgba(219, 112, 147, 0.25);
+                border: 2px solid palevioletred;
+                color: palevioletred;
+                margin-bottom: 1em;
+            }
+            
+            #confirm {
+                padding: 1.2em;
+                background: rgba(138, 219, 101, 0.25);
+                border: 2px solid #68d337;
+                color: #68d337;
+                margin-bottom: 1em;
+            }
+            
+            
+            .label--title {
+                margin-bottom: 0.2em;
+                font-size: 14px;
+                text-transform: uppercase;
+                font-weight: 200;
+            }
+            
+            .label--title.error--label {
+                margin-bottom: .4em;
+            }
+            
+            table {
+                background: white;
+                padding: 1em;
+                border-radius: 1.2em;
+            }
+            
+            td {
+                width: 33%;
+                padding: .3em;
+                padding-right: 1em;
+            }
+            
+            td:last-child {
+                margin-right: 0;
+            }
+            
+            
+            thead tr {
+                box-shadow: 0 1px #278ceb;
+            }
+            
+            .row--entry {
+                box-shadow: 0px 1px rgba(192, 192, 192, 0.35);
+            }
+            .row--entry td {
+                padding-top: .6em;
+            }
+            .column--range {
+                color: #0069eb;
+            }
+            
+            .column--count,
+            .column--percentage {
+                text-align: right;
+            }
+            
+            .total--entry {
+                font-weight: 800;
+            }
+
+            @media screen and (max-width: 375px) {
+                section {
+                    flex-flow: column;
+                    justify-content: flex-start;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Distribuzione per fascia d'età</h2>
+        </header>
+        <section>
+            <main>
+                <div id="interaction">
+                    <label for="peopleAge" class="label--title">Valori età:</label>
+                    <input type="text" name="peopleAge" id="peopleAge" placeholder="14, 4, 43, 11, 24, 10, ...">
+                    <button name="calcola" type="button" onclick="submitPeople()">calcola</button>
+                </div>
+                <div id="messages">
+                    <div id="errors">
+                        <h3 class="error--label label--title">Errore</h3>
+                        <p class="error--message"></p>
+                        <input hidden class="error--value" id="nan" value="Non è stato inserito alcun valore numerico." >
+                        <input hidden class="error--value" id="oor" value="Alcuni valori inseriti si trovano fuori dal range di calcolo.">
+                        <p class="error--footer">Ricontrolla i valori inseriti.</p>
+                    </div>
+                    <div id="confirm">
+                        <h3 class="error--label label--title">Successo</h3>
+                        <p class="error--message"></p>
+                        <input hidden class="error--value" id="success" value="Distribuzione calcolata.">
+                    </div>
+                </div>
+            </main>
+            <aside>
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="label--title">Range</td>
+                            <td class="label--title">Totale</td>
+                            <td class="label--title">Percentuale</td>
+                        </tr>
+                    </thead>
+                    <tbody id="risultati"></tbody>
+                </table>
+            </aside>
+        </section>
+        
+
+        <script type="text/javascript">
+
+            // init Errors
+            let $errors = document.querySelectorAll(".error--value"),
+                errors = [];
+            
+            function Error(id, text) {
+                this.id = id;
+                this.text = text;
+                this.show = function() {
+                    errorDiv = document.getElementById(id).parentElement;
+                    errorDiv.style.display = "block";
+                    errorTxt = errorDiv.querySelector(".error--message");
+                    errorTxt.innerHTML = text;
+                };
+
+                this.hide = function() {
+                    errorDiv = document.getElementById(id).parentElement;
+                    errorDiv.style.display = "none";
+                    errorTxt = errorDiv.querySelector(".error--message");
+                    errorTxt.innerHTML = "";
+                }
+            }
+
+            $errors.forEach($error => {
+                errors[$error.id] = new Error($error.id, $error.value);
+            });
+
+            function hideErrors() {
+                for (let i in errors) {
+                    errors[i].hide();
+                };
+            };
+
+            hideErrors();
+
+            // calculate age range distribution
+            var ageRanges = [
+                {"count": 0, "percentage": 0, "min":0, "max":5},
+                {"count": 0, "percentage": 0, "min":6, "max":10},
+                {"count": 0, "percentage": 0, "min": 11, "max": 15},
+                {"count": 0, "percentage": 0, "min": 16, "max": 20},
+                {"count": 0, "percentage": 0, "min": 21, "max": 25},
+                {"count": 0, "percentage": 0, "min": 26, "max": 30},
+                {"count": 0, "percentage": 0, "min": 31, "max": 35},
+                {"count": 0, "percentage": 0, "min": 36, "max": 40},
+                {"count": 0, "percentage": 0, "min": 41, "max": 45},
+                {"count": 0, "percentage": 0, "min": 46, "max": 50},
+                {"count": 0, "percentage": 0, "min": 51, "max": 55},
+                {"count": 0, "percentage": 0, "min": 56, "max": 60},
+                {"count": 0, "percentage": 0, "min": 61, "max": 65},
+                {"count": 0, "percentage": 0, "min": 66, "max": 70},
+                {"count": 0, "percentage": 0, "min": 71, "max": 75},
+                {"count": 0, "percentage": 0, "min": 76, "max": 80},
+                {"count": 0, "percentage": 0, "min": 81, "max": 85},
+                {"count": 0, "percentage": 0, "min": 86, "max": 90}
+            ];
+            
+            
+
+
+            function submitPeople() {
+
+                hideErrors();
+
+                // init input  array
+                let ageInput = document.getElementById("peopleAge"),
+                    ageListRaw = ageInput.value.split(" "),
+                    ageList = [],
+                    resultTable = document.getElementById("risultati");
+
+                // validate input list
+                for (var persona in ageListRaw) {
+                    age = parseInt(ageListRaw[persona]);
+                    if (!isNaN(age)) {
+                        ageList.push(age);
+                    }
+                }
+
+                if (ageList.length > 0) {
+                    calculateDistribution(ageList, resultTable);
+                    errors.success.show();
+                } else {
+                    errors.nan.show();
+                    resetTable(resultTable);
+                };
+
+                ageInput.value = "";
+            }
+
+            function calculateDistribution(list, table) {
+                // reset parameters
+                let totalPercentage = 0;
+                resetTable(table);
+                for (const range of ageRanges) {
+                    range.count = 0;
+                    range.percentage = 0;
+                }
+
+                // calculate distribution data
+                for (var i in list) {
+                    age = parseInt(list[i]);
+
+                    let matchedRange = false;
+
+                    for (const range of ageRanges) {
+                        if (age >= range.min && age <= range.max) {
+                            range.count++;
+                            range.percentage = Math.floor(((range.count*100)/list.length)*100)/100;
+                            matchedRange = true;
+                        }
+                    }
+                    matchedRange == true ? true : errors.oor.show();
+                }
+
+                // show table-formatted results
+                for (const range of ageRanges) {
+                    totalPercentage += range.percentage;
+                    addEntryRow(table, range);
+                }
+                
+                addFooterRow(table, list, totalPercentage);
+            };
+
+            
+            function addEntryRow(table, range) {
+                let newRow = table.insertRow();
+                newRow.classList.add("row--entry");
+                
+                for (let i = 0; i < 3; i++) {
+                    newCell = newRow.insertCell();
+
+                    switch (i) {
+                        case 0:
+                            newCell.append(`${range.min}-${range.max}`);
+                            newCell.classList.add("column--range");
+                            break;
+                        case 1:
+                            newCell.append(`${range.count}`);
+                            newCell.classList.add("column--count");
+                            break;
+                        case 2:
+                        newCell.append(`${range.percentage}%`);
+                            newCell.classList.add("column--percentage");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            function addFooterRow(table, params, totalPercentage) {
+                let totalRow = table.insertRow();
+                totalRow.classList.add("total--entry");
+                
+                for (let i = 0; i < 3; i++) {
+                    newCell = totalRow.insertCell();
+
+                    switch (i) {
+                        case 0:
+                            newCell.classList.add("column--range");
+                            break;
+                        case 1:
+                            newCell.append(`${params.length}`);
+                            newCell.classList.add("column--count");
+                            break;
+                        case 2:
+                            newCell.append(`${Math.ceil(totalPercentage)}%`);
+                            newCell.classList.add("column--percentage");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            function resetTable(table) {
+                if (table.children.length > 0) {
+                    while (table.getElementsByTagName("tr").length > 0) {
+                        table.removeChild(table.getElementsByTagName("tr")[0]);
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
